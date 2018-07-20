@@ -1,0 +1,11 @@
+# antibody plugins
+
+djui/alias-tips
+
+# annotations are also allowed:
+robbyrussell/oh-my-zsh folder:plugins/git
+
+denysdovhan/spaceship-prompt
+
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
