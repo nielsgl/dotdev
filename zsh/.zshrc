@@ -27,9 +27,8 @@ compinit
 # End of lines added by compinstall
 
 # aliases
-alias reload='source ~/.zshrc'
-
-echo $SHELL
+# alias reload='source ~/.zshrc'
+alias reload!='exec "$SHELL" -l'
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
