@@ -1,3 +1,16 @@
+#!/usr/local/bin/zsh
+
+# shortcut to this dotfiles path is $DOTFILES
+export DOTFILES="$HOME/.dotfiles"
+
+# project folder that we can `c [tab]` to
+export PROJECTS="$HOME/Code"
+
+# your default editor
+# export EDITOR='vim'
+export EDITOR='code'
+export VEDITOR='code'
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=100000
@@ -15,6 +28,8 @@ compinit
 
 # aliases
 alias reload='source ~/.zshrc'
+
+echo $SHELL
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -66,7 +81,8 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_CHAR_SUFFIX=' '
 
 # nodenv
-eval "$(nodenv init -)"
+# eval "$(nodenv init -)"
+source $DOTFILES/node/path.zsh
 
 # zsh-autosuggestions
 #source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
