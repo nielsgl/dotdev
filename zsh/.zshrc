@@ -11,81 +11,77 @@ export PROJECTS="$HOME/Code"
 export EDITOR='code'
 export VEDITOR='code'
 
+# all of our zsh files
+typeset -U config_files
+config_files=($DOTFILES/*/*.zsh)
+
+# load the path files
+echo "sourcing: */path.zsh"
+for file in ${(M)config_files:#*/path.zsh}; do
+	echo "sourcing: $file"
+	source "$file"
+done
+
+# Uncomment the following line to use case-sensitive completion.
+CASE_SENSITIVE="false"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# load antibody plugins
+# source <(antibody init)
+antibody bundle < "$DOTFILES/zsh/plugins.txt" > "$DOTFILES/zsh/zsh_plugins.sh"
+source $DOTFILES/zsh/zsh_plugins.sh
+
+# load everything but the path and completion files
+echo "sourcing: all but path.zsh and completion.zsh"
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+	echo "sourcing: $file"
+	source "$file"
+done
+
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
-setopt appendhistory nomatch notify
-unsetopt beep
-bindkey -e
+# MOVED TO config.zsh
 # End of lines configured by zsh-newuser-install
+
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/niels/.zshrc'
 
 autoload -Uz compinit
-compinit
+# compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
 # End of lines added by compinstall
 
 # aliases
 # alias reload='source ~/.zshrc'
 alias reload!='exec "$SHELL" -l'
 
+
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-source <(antibody init)
-antibody bundle < ~/.dotfiles/zsh/plugins.txt
-
-# SPACESHIP_PROMPT_ORDER=(
-#   time          # Time stampts section
-#   user
-# )
-SPACESHIP_PROMPT_ORDER=(
-  time          # Time stampts section
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-#   hg            # Mercurial section (hg_branch  + hg_status)
-  package       # Package version
-  node          # Node.js section
-  ruby          # Ruby section
-#   elixir        # Elixir section
-#   xcode         # Xcode section
-#   swift         # Swift section
-  golang        # Go section
-#   php           # PHP section
-#   rust          # Rust section
-#   haskell       # Haskell Stack section
-#   julia         # Julia section
-  docker        # Docker section
-  aws           # Amazon Web Services section
-  venv          # virtualenv section
-  conda         # conda virtualenv section
-  pyenv         # Pyenv section
-#   dotnet        # .NET section
-#   ember         # Ember.js section
-#   kubecontext   # Kubectl context section
-  exec_time     # Execution time
-  line_sep      # Line break
-  battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-SPACESHIP_TIME_SHOW=true
-# SPACESHIP_USER_SHOW=always
-# SPACESHIP_HOST_SHOW=always
-# SPACESHIP_CHAR_SYMBOL=$
-SPACESHIP_CHAR_SUFFIX=' '
-
-# nodenv
-# eval "$(nodenv init -)"
-source $DOTFILES/node/path.zsh
+# load every completion after autocomplete loads
+echo "sourcing: */completion.zsh"
+for file in ${(M)config_files:#*/completion.zsh}; do
+	echo "sourcing: $file"
+	source "$file"
+done
 
 # zsh-autosuggestions
 #source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-antibody bundle < ~/.dotfiles/zsh/plugins_last.txt
+# antibody bundle < ~/.dotfiles/zsh/plugins_last.txt
+# antibody bundle < "$DOTFILES/zsh/plugins_last.txt" > "$DOTFILES/zsh/zsh_plugins_last.sh"
+# source $DOTFILES/zsh/zsh_plugins_last.sh
 
+unset config_files updated_at
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

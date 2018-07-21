@@ -1,11 +1,12 @@
 - defaults:
     link:
-      create: true
-      relink: true
+        create: true
+        relink: true
 
 # - clean: ['~']
 
 - link:
+    ~/.bin: bin
     ~/.dotfiles: ''
     # ~/.tmux.conf: tmux.conf
     # ~/.vim: vim
@@ -13,7 +14,7 @@
     ~/.zshrc: zsh/.zshrc
 
 - shell:
-  - ["git submodule update --init --recursive", Installing submodules]
-  - ["git submodule sync", Syncing submodule remotes]
-  - ["git submodule foreach git pull origin master", Updating submodule contents]
-  - ["date > ~/.dotfiles_update", Logging last update]
+    - ["git submodule update --init --recursive", Installing submodules]
+    - ["git submodule sync", Syncing submodule remotes]
+    - ["git submodule foreach git pull origin master", Updating submodule contents]
+    - ["date > ~/.dotfiles_update", Logging last update]
