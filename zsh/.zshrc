@@ -59,12 +59,6 @@ else
 fi
 # End of lines added by compinstall
 
-# aliases
-# alias reload='source ~/.zshrc'
-alias reload!='exec "$SHELL" -l'
-
-
-
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # load every completion after autocomplete loads
@@ -85,3 +79,8 @@ done
 unset config_files updated_at
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+# shellcheck disable=SC1090
+[ -f ~/.localrc ] && . ~/.localrc

@@ -4,9 +4,9 @@ export LSCOLORS='exfxcxdxbxegedabagacad'
 export CLICOLOR=true
 
 # need to add these files
-# fpath=($DOTFILES/functions $fpath)
+fpath=($DOTFILES/functions $fpath)
 
-# autoload -U "$DOTFILES"/functions/*(:t)
+autoload -U "$DOTFILES"/functions/*(:t)
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 

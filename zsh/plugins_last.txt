@@ -1,4 +1,0 @@
-# antibody plugins
-# these should be at last!
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-history-substring-search
