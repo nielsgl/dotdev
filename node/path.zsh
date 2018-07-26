@@ -2,6 +2,12 @@
 
 __nodenv_started=0
 
+# init according to man page
+# if (( $+commands[rbenv] ))
+# then
+#   eval "$(rbenv init -)"
+# fi
+
 __nodenv_init() {
 	test $__nodenv_started = 0 && {
 		eval "$(command nodenv init -)"

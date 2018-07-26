@@ -1,5 +1,16 @@
 #!/usr/local/bin/zsh
 
+# autoload colors && colors
+# # cheers, @ehrenmurdick
+# # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
+
+# if (( $+commands[git] ))
+# then
+#   git="$commands[git]"
+# else
+#   git="/usr/bin/git"
+# fi
+
 # SPACESHIP_PROMPT_ORDER=(
 #   time          # Time stampts section
 #   user
