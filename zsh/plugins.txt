@@ -3,7 +3,14 @@
 djui/alias-tips
 
 # annotations are also allowed:
-# robbyrussell/oh-my-zsh folder:plugins/git
+robbyrussell/oh-my-zsh folder:plugins/git
+robbyrussell/oh-my-zsh folder:plugins/colored-man-pages
+robbyrussell/oh-my-zsh folder:plugins/npm
+
+# common-aliases
+# dotenv
+# direnv
+# zsh-autoenv
 
 denysdovhan/spaceship-prompt
 

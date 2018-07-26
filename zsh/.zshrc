@@ -11,16 +11,28 @@ export PROJECTS="$HOME/Code"
 export EDITOR='code'
 export VEDITOR='code'
 
+DEBUG=false
+
 # all of our zsh files
 typeset -U config_files
 config_files=($DOTFILES/*/*.zsh)
 
+if [ -z $DEBUG ]; then
+	echo "\nStep1: $fpath\n"
+	hello
+fi
+
 # load the path files
-echo "sourcing: */path.zsh"
+# echo "sourcing: */path.zsh"
 for file in ${(M)config_files:#*/path.zsh}; do
-	echo "sourcing: $file"
+	# echo "sourcing: $file"
 	source "$file"
 done
+
+if [ -z $DEBUG ]; then
+	echo "\nStep2: $fpath\n"
+	hello
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
@@ -29,17 +41,27 @@ CASE_SENSITIVE="false"
 # sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-# load antibody plugins
-# source <(antibody init)
-antibody bundle < "$DOTFILES/zsh/plugins.txt" > "$DOTFILES/zsh/zsh_plugins.sh"
-source $DOTFILES/zsh/zsh_plugins.sh
+# # load antibody plugins
+# # source <(antibody init)
+# antibody bundle < "$DOTFILES/zsh/plugins.txt" > "$DOTFILES/zsh/zsh_plugins.sh"
+# source $DOTFILES/zsh/zsh_plugins.sh
+
+if [ -z $DEBUG ]; then
+	echo "\nStep3: $fpath\n"
+	hello
+fi
 
 # load everything but the path and completion files
-echo "sourcing: all but path.zsh and completion.zsh"
+# echo "sourcing: all but path.zsh and completion.zsh"
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
-	echo "sourcing: $file"
+	# echo "sourcing: $file"
 	source "$file"
 done
+
+if [ -z $DEBUG ]; then
+	echo "\nStep4: $fpath\n"
+	hello
+fi
 
 # Lines configured by zsh-newuser-install
 # MOVED TO config.zsh
@@ -61,10 +83,15 @@ fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+if [ -z $DEBUG ]; then
+	echo "\nStep5: $fpath\n"
+	hello
+fi
+
 # load every completion after autocomplete loads
-echo "sourcing: */completion.zsh"
+# echo "sourcing: */completion.zsh"
 for file in ${(M)config_files:#*/completion.zsh}; do
-	echo "sourcing: $file"
+	# echo "sourcing: $file"
 	source "$file"
 done
 
@@ -76,6 +103,16 @@ done
 # antibody bundle < "$DOTFILES/zsh/plugins_last.txt" > "$DOTFILES/zsh/zsh_plugins_last.sh"
 # source $DOTFILES/zsh/zsh_plugins_last.sh
 
+# load antibody plugins
+# source <(antibody init)
+antibody bundle < "$DOTFILES/zsh/plugins.txt" > "$DOTFILES/zsh/zsh_plugins.sh"
+source $DOTFILES/zsh/zsh_plugins.sh
+
+if [ -z $DEBUG ]; then
+	echo "\nStep6: $fpath\n"
+	hello
+fi
+
 unset config_files updated_at
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -84,3 +121,10 @@ unset config_files updated_at
 # want in your public, versioned repo.
 # shellcheck disable=SC1090
 [ -f ~/.localrc ] && . ~/.localrc
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/niels/.nodenv/versions/10.4.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/niels/.nodenv/versions/10.4.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/niels/.nodenv/versions/10.4.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/niels/.nodenv/versions/10.4.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

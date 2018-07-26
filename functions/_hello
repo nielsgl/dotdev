@@ -1,0 +1,2 @@
+#compdef hello
+_files -W $PROJECTS -/
